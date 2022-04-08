@@ -41,7 +41,8 @@ export default {
         return{
             resources: this.storedResources,
             //inject addResource Method To AddResource.vue 
-            addResource: this.addResource
+            addResource: this.addResource,
+            deleteResource: this.removeResource
         };
     },
     methods: {
@@ -57,6 +58,11 @@ export default {
             };
             this.storedResources.unshift(newResource);
             this.selectedTab = 'stored-resources';
+        },
+        removeResource(resid){
+            //don't create new array without the deleted resource cause is not working DOM already rendered
+            const resIndex = this.storedResources.findIndex(res => res.id === resid);
+            this.storedResources.splice(resIndex,1);
         }
     },
     computed:{

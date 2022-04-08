@@ -1,24 +1,27 @@
 <template>
-<!--Hide dialog when click on the back-->
-<div @click="$emit('close')"></div>
-    <dialog open>
-        <header>
-            <slot name="header">
-                <!--used if no header will be provider-->
-                <h2>{{ title }}</h2>
-            </slot>
-        </header>
-        <section>
-            <!--slot with no name == default slot-->
-            <slot></slot>
-        </section>
-        <menu>
-            <slot name="actions">
-                <!--if action slot back without button show ths button-->
-                <base-button @click="$emit('close')">Close</base-button>
-            </slot>
-        </menu>
-    </dialog>
+<!--teleport to show this dialog in the end of body section-->
+    <teleport to="body">
+        <!--Hide dialog when click on the back-->
+        <div @click="$emit('close')"></div>
+            <dialog open>
+                <header>
+                    <slot name="header">
+                        <!--used if no header will be provider-->
+                        <h2>{{ title }}</h2>
+                    </slot>
+                </header>
+                <section>
+                    <!--slot with no name == default slot-->
+                    <slot></slot>
+                </section>
+                <menu>
+                    <slot name="actions">
+                        <!--if action slot back without button show ths button-->
+                        <base-button @click="$emit('close')">Close</base-button>
+                    </slot>
+                </menu>
+            </dialog>
+    </teleport>
 </template>
 
 <script>
